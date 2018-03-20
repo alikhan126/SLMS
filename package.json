@@ -1,0 +1,23 @@
+{
+  "name": "sms",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abeersaqib/SLMS-CC.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abeersaqib/SLMS-CC/issues"
+  },
+  "homepage": "https://github.com/abeersaqib/SLMS-CC#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "description": ""
+}
