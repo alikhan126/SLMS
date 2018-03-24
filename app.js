@@ -37,6 +37,18 @@ mongoose.connect('mongodb://localhost/slms_db',function (err) {
 
 var User = require("./models/userModel.js")
 
+User.findOne({
+    email : "admin@school.com",
+    password : "1234"
+}).exec(function(err,user){
+  if(!user){
+    new User({
+      email : "admin@school.com",
+      password : "1234"
+    }).save();
+  }
+});
+
 app.get("/", (req,res)=>{
   res.sendfile(__dirname + '/public/index.html');
 })
