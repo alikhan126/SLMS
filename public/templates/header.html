@@ -1,0 +1,140 @@
+<div class="top-bar ng-scope">
+  <style>
+    .top-bar > ul > li > a > i{
+      font-size: 17px;
+    }
+  </style>
+    <ul class="pull-left" style="margin-left:229px;">
+      <li><a title=""><i class="fa fa-envelope-o"></i></a></li>
+      <li><a href="#/" title=""><i class="fa fa-globe"></i></a></li>
+    </ul>
+    <ul class="pull-right" style="margin-right: 20px">
+
+        <li><a href="#/logout" title=""><i class="fa fa-power-off"></i>Logout</a></li>
+
+
+    </ul>
+
+</div>
+
+<header class="side-header light-skin opened-menu">
+    <div class="admin-details">
+        <span><img src="images/resource/admin.jpg" alt="" /></span>
+        <h3 style="margin-top:15px;">Junaid Ali</h3>
+        <i>Admin</i>
+    </div>
+    <div class="menu-scroll">
+        <div class="side-menus">
+            <span>MAIN LINKS</span>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#/home" title=""><i class="fa fa-dashboard"></i> <span>Dashboard</a>
+                    </li>
+                    <li><a href="#/school-branches"><i class="fa fa-code-fork"></i> <span>School Branches</a></li>
+                    <li class="menu-item-has-children">
+                        <a href="#" title=""><i class="fa fa-puzzle-piece"></i>
+                          <span>Security</a>
+                        <ul>
+                          <li> <a href="#/users"><i class="fa fa-circle-o-notch"></i> <span>Users</span> </a></li>
+                          <li> <a href="#/profiles"><i class="fa fa-circle-o-notch"></i> <span>Profiles</span> </a> </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div><!-- Menu Scroll -->
+</header>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    "use strict";
+    //***** Side Menu *****//
+      $(".side-menus li.menu-item-has-children > a").on("click",function(){
+          $(this).parent().siblings().children("ul").slideUp();
+          $(this).parent().siblings().removeClass("active");
+          $(this).parent().children("ul").slideToggle();
+          $(this).parent().toggleClass("active");
+          return false;
+      });
+
+      //***** Side Menu Option *****//
+      $('.menu-options').on("click", function(){
+        $(".side-header.opened-menu").toggleClass('slide-menu');
+        $(".main-content").toggleClass('wide-content');
+        $("footer").toggleClass('wide-footer');
+        $(".menu-options").toggleClass('active');
+      });
+
+    /*** FIXED Menu APPEARS ON SCROLL DOWN ***/
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+        if (scroll >= 10) {
+        $(".side-header").addClass("sticky");
+        }
+        else{
+        $(".side-header").removeClass("sticky");
+        $(".side-header").addClass("");
+        }
+    });
+
+    $(".side-menus nav > ul > li ul li > a").on("click", function(){
+        $(".side-header").removeClass("slide-menu");
+        $(".menu-options").removeClass("active");
+    });
+
+      //***** Quick Stats *****//
+      $('.show-stats').on("click", function(){
+        $(".toggle-content").addClass('active');
+      });
+
+       //***** Quick Stats *****//
+      $('.toggle-content > span').on("click", function(){
+        $(".toggle-content").removeClass('active');
+      });
+
+      //***** Quick Stats *****//
+      $('.quick-links > ul > li > a').on("click", function(){
+        $(this).parent().siblings().find('.dialouge').fadeOut();
+        $(this).next('.dialouge').fadeIn();
+        return false;
+      });
+
+      $("html").on("click", function(){
+        $(".dialouge").fadeOut();
+      });
+      $(".quick-links > ul > li > a, .dialouge").on("click",function(e){
+            e.stopPropagation();
+        });
+
+      //***** Toggle Full Screen *****//
+      function goFullScreen() {
+        var
+            el = document.documentElement
+          , rfs =
+                 el.requestFullScreen
+              || el.webkitRequestFullScreen
+              || el.mozRequestFullScreen
+              || el.msRequestFullscreen
+
+      ;
+      rfs.call(el);
+      }
+      $("#toolFullScreen").on("click",function() {
+          goFullScreen();
+      });
+
+      //***** Side Menu *****//
+      $(function(){
+          $('.side-menus').slimScroll({
+              height: '400px',
+              wheelStep: 10,
+              size: '2px'
+          });
+      });
+
+
+      $(".data-attributes span").peity("donut");
+});
+</script>

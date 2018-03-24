@@ -1,0 +1,54 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+
+<div class="panel-content">
+
+	<h3> <i class="fa fa-lock"></i> Permissions <small>/ <span class="label label-success">{{profile}}</span> </small> </h3>
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	    	<button ng-click="submit()" class="btn btn-sm btn-success">
+	                <i class="fa fa-floppy-o"></i> Save
+	        </button>
+
+	        <button href="#" class="btn btn-sm btn-default">
+	                <i class="fa fa-refresh"></i>
+	        </button>
+
+					<button ng-click="checkAll()" class="btn btn-sm btn-default">
+	                <i class="fa fa-check"></i> Mark all
+	        </button>
+
+	        <div class="pull-right" style="margin-top: -5px;">
+	        	<input type="search" class="form-control" placeholder="Search" aria-controls="data">
+	        </div>
+	    </div>
+	    <div class="panel-body">
+	    	<table class="table table-hover">
+	    		<thead>
+	    			<tr>
+							<th> S.No </th>
+	    				<th> Actions </th>
+	    				<th ng-repeat="i in types"> {{i}}</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+
+	    			<tr  ng-repeat="action in actions" class="s-tr">
+							<td> {{$index+1}} </td>
+	    				<td> {{action}} </td>
+	    				<td ng-repeat="i in types">
+								<input type="checkbox" value="{{i}}"  ng-model="permissions[action][i]" >
+							</td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    </div>
+	</div>
+
+
+
+
+</div><!-- Panel Content -->

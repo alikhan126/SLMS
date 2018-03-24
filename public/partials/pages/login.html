@@ -1,0 +1,45 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+<div class="account-user-sec">
+	<div class="account-sec">
+		<div class="acount-sec">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="contact-sec">
+							<div class="widget-title">
+								<img src="images/logo.png" class="login-logo">
+							</div><!-- Widget title -->
+							<div class="account-form">
+								<form>
+									<div class="row">
+										<div class="feild col-md-12">
+											<input type="text" placeholder="Email" ng-model="user.email" />
+										</div>
+										<div class="feild col-md-12">
+											<input type="password" placeholder="Password" ng-model="user.password" />
+										</div>
+
+										<div class="feild col-md-6">
+											<input type="submit" value="Login Now" ng-click="login()" />
+										</div>
+										<div class="feild col-md-6" style="padding-top: 30px;">
+											<a href="#/forgot-password"> Forgot Password </a>
+										</div>
+										<div class="feild col-md-12" ng-show="error">
+											<div class="alert alert-danger" style="border-radius: 30px;
+										  font-size: 10pt;
+										  margin-bottom: 12px;
+										  margin-top: 10px;"> Unable to login, Try again </div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- Account Sec -->
+</div>

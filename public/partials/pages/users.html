@@ -1,0 +1,62 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+
+<div class="panel-content">
+
+	<h3> School Administrators </h3>
+	<p>  Manage adminstrators for different branches of school </p>
+
+
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+					<a href="#/users/create" class="btn btn-sm btn-primary">
+							<i class="fa fa-plus-circle"></i>
+							New
+					</a>
+		        <div class="pull-right" style="margin-top: -5px;">
+		        	<input type="search" class="form-control" placeholder="Search" aria-controls="data">
+		        </div>
+		    </div>
+		    <div class="panel-body">
+
+					<table class="table table-striped" at-table at-paginated at-list="list" at-config="config">
+					  <thead></thead>
+					  <tbody>
+					    <tr>
+					      <td at-implicit at-attribute="name" width="250"></td>
+					      <td at-implicit at-attribute="branchName" at-title="Branch" width="250"></td>
+								<td at-implicit at-attribute="profileName" at-title="Profile" width="250"></td>
+					      <td>
+						      	<a href="#/users/create/{{item._id}}" class="btn btn-success btn-sm">
+						      		<i class="fa fa-pencil-square-o "></i>
+						      		Edit
+						      	</a>
+					            <button class="btn btn-warning btn-sm">
+					            	<i class="fa fa-exclamation-triangle"></i>
+					            	Login as User
+					            </button>
+					            <button ng-click="delete(item._id)" class="btn btn-danger btn-sm">
+					                <i class="fa fa-trash"></i>
+					                Delete
+					            </button>
+				        	</td>
+					    </tr>
+					  </tbody>
+					</table>
+
+					<at-pagination at-list="list" at-config="config"></at-pagination>
+
+
+		    </div>
+		</div>
+
+
+
+
+
+
+</div><!-- Panel Content -->
+<script type="text/javascript">
+</script>

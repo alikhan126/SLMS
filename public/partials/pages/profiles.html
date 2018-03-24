@@ -1,0 +1,89 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+<div class="panel-content">
+
+	<h3> <i class="fa fa-users"></i> Profiles </h3>
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	    	<button ng-click="open()" class="btn btn-sm btn-primary">
+	                <i class="fa fa-plus-circle"></i>
+	        </button>
+	        <button ng-click="edit()" class="btn btn-sm btn-warning" ng-class="{'disabled': rowIndex==undefined }">
+	                <i class="fa fa-edit"></i>
+	        </button>
+	        <button ng-click="remove()" class="btn btn-sm btn-danger" ng-class="{'disabled': rowIndex==undefined }">
+	                <i class="fa fa-trash"></i>
+	        </button>
+	        |
+	        <button ng-click="reload()" class="btn btn-sm btn-default">
+	                <i class="fa fa-refresh"></i>
+	        </button>
+	        <div class="pull-right" style="margin-top: -5px;">
+	        	<input type="search" class="form-control" placeholder="Search" aria-controls="data">
+	        </div>
+	    </div>
+	    <div class="panel-body">
+	    	<table class="table table-hover" at-table at-paginated at-list="list" at-config="config">
+			  <thead></thead>
+			  <tbody>
+			    <tr ng-click="rowSelect($index)" angular-click-outside="clickOutside()" ng-class="{'highlight':$index == rowIndex }">
+			      <td at-implicit at-attribute="name" ></td>
+			      <td at-implicit at-attribute="description"></td>
+			      <td at-implicit at-attribute="status"></td>
+			      <td at-implicit at-attribute="createdAt" at-title="Created at"></td>
+			      <td at-implicit at-attribute="updatedAt" at-title="Updated at"></td>
+			      <td at-title="Manage Permissions">
+				      	<a href="#/profiles/permissions/{{list[$index]._id}}" class="btn btn-success btn-sm">
+				      		<i class="fa fa-lock "></i>
+				      	</a>
+		        	</td>
+			    </tr>
+			  </tbody>
+			</table>
+
+			<at-pagination at-list="list" at-config="config"></at-pagination>
+	    </div>
+	</div>
+
+	  <div modal="showModal" close="cancel()">
+			<form  angular-validator-submit="submit()" name='schoolBranchForm' class="form-horizontal" novalidate angular-validator>
+	    <div class="modal-header">
+	        <h4>Add profile</h4>
+	    </div>
+	    <div class="modal-body">
+	        <div class="form-group">
+	  	 	 <label>Name</label>
+			 <input type="text" ng-model="profile.name" class="form-control" required>
+			</div>
+			 <div class="form-group">
+			 	 <label>Description</label>
+				 <input type="text" ng-model="profile.description" class="form-control" required>
+			 </div>
+			  <div class="form-group" >
+			  	 <label>Status</label>
+				 <SELECT class="form-control" ng-model="profile.status" required>
+				 	<option>Active</option>
+				 	<option>Inactive</option>
+				 </SELECT>
+			 </div>
+	    </div>
+	    <div class="modal-footer">
+	      <button class="btn btn-success" type="submit">Submit</button>
+	      <button class="btn" ng-click="showModal = false">Cancel</button>
+	    </div>
+		</form>
+	  </div>
+
+
+</div><!-- Panel Content -->
+<script type="text/javascript">
+	$(".table-hover tbody tr").click(function(){
+	      if($(this).hasClass("highlight"))
+	          $(this).removeClass('highlight');
+	      else
+	          $(this).addClass('highlight').siblings().removeClass('highlight');
+	});
+</script>

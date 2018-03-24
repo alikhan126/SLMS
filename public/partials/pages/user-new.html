@@ -1,0 +1,108 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+
+<div class="panel-content">
+
+	<h3> Create School Administrator </h3>
+	<p> This will be the branch manager of any school or a temporary admin ( you can control permissions also).
+	<form  angular-validator-submit="submit()" name='userCreateForm' novalidate angular-validator>
+
+	<div class="widget" style="padding: 25px;">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>First name <span class="text-danger">*</span></label>
+							<input type="text" ng-model="user.firstName" class="form-control" required>
+		 				</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Last name <span class="text-danger">*</span></label>
+							<input type="text" ng-model="user.lastName" class="form-control" required>
+		 				</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Email <span class="text-danger">*</span></label>
+							<input type="email" ng-model="user.email" class="form-control" required>
+		 				</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Contact number <span class="text-danger">*</span></label>
+							<input type="tel" ng-model="user.contactNumber" class="form-control" required>
+		 				</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-">
+				<img src="images/avatar.png" class="avatar">
+				<br><br>
+				<input type="file" fileread="user.photo" name="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<label>Home address <span class="text-danger">*</span></label>
+					<textarea ng-model="user.address" class="form-control"></textarea>
+ 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>Date of birth <span class="text-danger">*</span></label>
+					<input type="date" ng-model="user.dateOfBirth" value="{{ user.dateOfBirth | date: 'dd/mm/yyyy' }}" class="form-control" required>
+ 				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>Place of birth</label>
+					<input type="text" ng-model="user.placeOfBirth" class="form-control">
+ 				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>Select branch <span class="text-danger">*</span></label>
+					<select class="form-control" ng-options="item._id as item.name for item in branches" ng-model="user.branch" required>
+					</select>
+ 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>Password <span class="text-danger">*</span></label>
+					<input type="text" ng-model="user.password" class="form-control">
+ 				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>Select Profile <span class="text-danger">*</span></label>
+					<select class="form-control" ng-options="item._id as item.name for item in profiles" ng-model="user.profile" required>
+					</select>
+ 				</div>
+			</div>
+		</div>
+		<!-- permissions -->
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group" style="margin-top: 24px;">
+					<button class="btn btn-success"><i class="fa fa-floppy-o" type="submit"></i> Submit</button>
+					<button class="btn btn-default" ng-click="user={}">Clear form</button>
+ 				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</div><!-- Panel Content -->
+<script type="text/javascript">
+</script>

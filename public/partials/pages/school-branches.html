@@ -1,0 +1,93 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+<div class="panel-content">
+
+	<h3> <i class="fa fa-users"></i> School Branches </h3>
+  <p> Manage different brances of school </p>
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	    	<button ng-click="open()" class="btn btn-sm btn-primary">
+	                <i class="fa fa-plus-circle"></i>
+	        </button>
+	        <button ng-click="edit()" class="btn btn-sm btn-warning" ng-class="{'disabled': rowIndex==undefined }">
+	                <i class="fa fa-edit"></i>
+	        </button>
+	        <button ng-click="remove()" class="btn btn-sm btn-danger" ng-class="{'disabled': rowIndex==undefined }">
+	                <i class="fa fa-trash"></i>
+	        </button>
+	        |
+	        <button href="#" class="btn btn-sm btn-default">
+	                <i class="fa fa-refresh"></i>
+	        </button>
+	        <div class="pull-right" style="margin-top: -5px;">
+	        	<input type="search" class="form-control" placeholder="Search" aria-controls="data">
+	        </div>
+	    </div>
+	    <div class="panel-body">
+	    	<table class="table table-hover" at-table at-paginated at-list="list" at-config="config">
+			  <thead></thead>
+			  <tbody>
+			    <tr ng-click="rowSelect($index)" angular-click-outside="clickOutside()" ng-class="{'highlight':$index == rowIndex }">
+			      <td at-implicit at-attribute="name" ></td>
+			      <td at-implicit at-attribute="address"></td>
+			      <td at-implicit at-attribute="contactPerson" at-title="Contact Person"></td>
+			      <td at-implicit at-attribute="contactNumber" at-title="Phone Number"></td>
+            <td at-implicit at-attribute="email" ></td>
+			    </tr>
+			  </tbody>
+			</table>
+
+			<at-pagination at-list="list" at-config="config"></at-pagination>
+	    </div>
+	</div>
+
+	  <div modal="showModal" close="cancel()">
+      <form  angular-validator-submit="submit()" name='schoolBranchForm' class="form-horizontal" novalidate angular-validator>
+	    <div class="modal-header">
+	        <h4>Add School Branch</h4>
+	    </div>
+	    <div class="modal-body">
+  	     <div class="form-group">
+  	  	 	 <label>Name</label>
+  			   <input type="text" ng-model="branch.name" class="form-control" placeholder="e.g Township" required>
+  			 </div>
+         <div class="form-group">
+  	  	 	 <label>Address</label>
+  			   <textarea ng-model="branch.address" class="form-control" required></textarea>
+  			 </div>
+  			 <div class="form-group">
+  			 	 <label>Contact Person</label>
+  				 <input type="text" ng-model="branch.contactPerson" class="form-control" required>
+  			 </div>
+         <div class="form-group">
+  			 	 <label>Phone Number</label>
+  				 <input type="tel" ng-model="branch.contactNumber" class="form-control" required>
+  			 </div>
+         <div class="form-group">
+  			 	 <label>Email</label>
+  				 <input type="email" ng-model="branch.email" class="form-control" required>
+  			 </div>
+
+	    </div>
+
+	    <div class="modal-footer">
+	      <input  class="btn btn-success" type="submit" value="Submit">
+	      <button class="btn" ng-click="showModal = false">Cancel</button>
+	    </div>
+      </form>
+
+	  </div>
+
+
+</div><!-- Panel Content -->
+<script type="text/javascript">
+	$(".table-hover tbody tr").click(function(){
+	      if($(this).hasClass("highlight"))
+	          $(this).removeClass('highlight');
+	      else
+	          $(this).addClass('highlight').siblings().removeClass('highlight');
+	});
+</script>
