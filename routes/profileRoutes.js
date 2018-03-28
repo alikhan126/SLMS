@@ -18,6 +18,11 @@ router.get('/:id', profileController.show);
 router.post('/', profileController.create);
 
 /*
+ *  EXISTS
+ */
+router.post('/exists/:name', profileController.verify);
+
+/*
  * PUT
  */
 router.put('/:id', profileController.update);

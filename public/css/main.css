@@ -503,13 +503,16 @@ header.side-header.light-skin {
 
     float: left;
     width: 59px;
+    height: 59px;
+    object-fit: cover;
 }
 .admin-details h3 {
     color: #ffffff;
     display: block;
     float: none;
     font-family: Montserrat;
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: bold;
     margin: 3px 0 0;
 }
 .admin-details > i {
@@ -14172,9 +14175,11 @@ label{
     box-shadow: none;
 }
 .avatar{
-    width: 100px;
-    margin-top: 20px;
-    border-radius: 24px;
+  width: 100px;
+  object-fit: cover;
+  height: 100px;
+  margin-top: 20px;
+  border-radius: 24px;
 }
 
 .highlight{
@@ -14221,4 +14226,33 @@ label{
   height: 12px; /*Desired height*/
   cursor: pointer;
   margin-left: 20px;
+}
+
+.validation-invalid{
+  background: #f48484;
+    font-size: 9pt;
+    position: absolute;
+    color: #fff;
+    width: 87%;
+    z-index: 1;
+    border-radius: 3px;
+    padding: 0px 15px;
+    top:64px;
+}
+.validation-invalid::before{
+  content: ' ';
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    position: absolute;
+    border-right: 12px solid transparent;
+    border-bottom: 9px solid #f48484;
+    top:-7px;
+}
+.validation-valid{
+  display: none;
+}
+
+.form-group{
+  position: relative;
 }

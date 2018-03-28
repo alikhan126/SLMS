@@ -21,6 +21,7 @@
     <!-- Our Website CSS Styles -->
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/sass.css">
+    <link href="css/toaster.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/responsive.css">
 
@@ -31,6 +32,7 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
+<toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button': true, 'body-output-type': 'trustedHtml', 'showDuration': '400', 'hideDuration': '200','time-out': 3000}"></toaster-container>
 
 <!-- Our Website Content Goes Here -->
     <div data-ng-include='"templates/header.html"'></div>
@@ -45,11 +47,18 @@
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
 <script type="text/javascript" src="js/angular-table.min.js"></script>
-
+<script src="js/toaster.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/angular-validation.min.js"></script>
+<script src="js/angular-validation-rule.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/controllers/homeCtrl.js" type="text/javascript"></script>
 <script src="js/controllers/permissionCtrl.js" type="text/javascript"></script>
 <script src="js/controllers/userCtrl.js" type="text/javascript"></script>
+<script src="js/controllers/profileCtrl.js" type="text/javascript"></script>
+<script src="js/controllers/schoolBranchesCtrl.js" type="text/javascript"></script>
 <script src="js/common.js"></script>
 
 

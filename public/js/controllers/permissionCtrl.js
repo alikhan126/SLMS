@@ -1,5 +1,7 @@
 angular.module('AmericanLyceum')
-.controller('PermissionsCtrl',['$scope','$routeParams','$http',function($scope, $routeParams,$http){
+.controller('PermissionsCtrl',function($rootScope,$scope, $routeParams,$http,toaster){
+
+  $rootScope.user = auth.getUser();
 
   $scope.profile = "";
   $scope.actions = [];
@@ -58,10 +60,10 @@ angular.module('AmericanLyceum')
     $http({method:"POST",url:"/permissions/"+$routeParams.profile,data:$scope.permissions})
     .success(function(data){
       console.log(data);
-      //toaster.pop('success', "Permissions", data.message);
+      toaster.pop('success', "Success", data.message);
     }).error(function(data){
       console.log(data);
-      //toaster.pop('error', "Permissions", data.message);
+      toaster.pop('error', "Error", data.message);
     });
   }
 
@@ -71,4 +73,4 @@ angular.module('AmericanLyceum')
         "width":"100%"
       });
   },500);
-}]);
+});

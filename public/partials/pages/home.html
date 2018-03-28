@@ -4,7 +4,30 @@
 
 <div class="panel-content">
 
-	<h3> Dashboard </h3>
+	<div class="heading-profile">
+		<h2>Hi <span ng-bind="user.firstName"></span></h2>
+		<span>This small dashboard shows overall statistics of all schools</span>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="rows">
+				<div class="col-md-6">
+					<div class="widget">
+						<div class="widget-controls">
+							<span class="refresh-content"><i class="fa fa-refresh"></i></span>
+						</div><!-- Widget Controls -->
+						<div class="mini-stats ">
+							<span class="purple-skin"><i class="fa fa-institution"></i></span>
+							<p> Schools </p>
+							<h3>2</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 

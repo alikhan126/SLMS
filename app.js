@@ -15,8 +15,8 @@ var FileStore = require('session-file-store')(session);
 
 
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'})); // for parsing application/json
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(cookieParser());
 app.use(session({
   store: new FileStore(),
@@ -61,6 +61,7 @@ app.post('/login', (req, res) => {
   }).exec(function(err, user) {
         if(user && !err){
           req.session.login = true;
+          req.session._id   = user._id;
           res.json(user);
         }
         else
@@ -69,12 +70,27 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/checkLogin',function(req,res){
-  console.log(req.session.login);
   if(req.session.login){
-    res.json({'login':true});
+    return res.json({'login':true});
   }else{
-    res.json({'login':false});
+    return res.json({'login':false});
   }
+});
+
+app.post("/verifyEmail",function(req,res){
+    console.log(req.body);
+    if(req.body.email != null){
+      if(req.body == req.body.email)
+        return res.sendStatus(200);
+      User.find({email : req.body.email},function(err,user){
+        if(!err && user)
+          return res.sendStatus(200);
+        else
+          return res.sendStatus(400);
+      });
+    }else{
+      return res.sendStatus(400);
+    }
 });
 
 app.get('/logout',function(req,res){

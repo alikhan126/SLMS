@@ -11,7 +11,7 @@
 	    	<button ng-click="open()" class="btn btn-sm btn-primary">
 	                <i class="fa fa-plus-circle"></i>
 	        </button>
-	        <button ng-click="edit()" class="btn btn-sm btn-warning" ng-class="{'disabled': rowIndex==undefined }">
+	        <button ng-click="edit(Form)" class="btn btn-sm btn-warning" ng-class="{'disabled': rowIndex==undefined }">
 	                <i class="fa fa-edit"></i>
 	        </button>
 	        <button ng-click="remove()" class="btn btn-sm btn-danger" ng-class="{'disabled': rowIndex==undefined }">
@@ -22,11 +22,11 @@
 	                <i class="fa fa-refresh"></i>
 	        </button>
 	        <div class="pull-right" style="margin-top: -5px;">
-	        	<input type="search" class="form-control" placeholder="Search" aria-controls="data">
+	        	<input type="search" class="form-control" placeholder="Search" ng-model="query" ng-change="search()" aria-controls="data">
 	        </div>
 	    </div>
 	    <div class="panel-body">
-	    	<table class="table table-hover" at-table at-paginated at-list="list" at-config="config">
+	    	<table class="table table-hover" at-table at-paginated at-list="filterList" at-config="config">
 			  <thead></thead>
 			  <tbody>
 			    <tr ng-click="rowSelect($index)" angular-click-outside="clickOutside()" ng-class="{'highlight':$index == rowIndex }">
@@ -44,34 +44,34 @@
 			  </tbody>
 			</table>
 
-			<at-pagination at-list="list" at-config="config"></at-pagination>
+			<at-pagination at-list="filterList" at-config="config"></at-pagination>
 	    </div>
 	</div>
 
 	  <div modal="showModal" close="cancel()">
-			<form  angular-validator-submit="submit()" name='schoolBranchForm' class="form-horizontal" novalidate angular-validator>
+			<form name="Form">
 	    <div class="modal-header">
 	        <h4>Add profile</h4>
 	    </div>
 	    <div class="modal-body">
 	        <div class="form-group">
 	  	 	 <label>Name</label>
-			 <input type="text" ng-model="profile.name" class="form-control" required>
+			 <input type="text" ng-model="profile.name" name="name" validator="required,verifyProfileName" class="form-control">
 			</div>
 			 <div class="form-group">
 			 	 <label>Description</label>
-				 <input type="text" ng-model="profile.description" class="form-control" required>
+				 <input type="text" ng-model="profile.description" name="description" validator="required" class="form-control">
 			 </div>
 			  <div class="form-group" >
 			  	 <label>Status</label>
-				 <SELECT class="form-control" ng-model="profile.status" required>
+				 <SELECT class="form-control" ng-model="profile.status" name="status" validator="required">
 				 	<option>Active</option>
 				 	<option>Inactive</option>
 				 </SELECT>
 			 </div>
 	    </div>
 	    <div class="modal-footer">
-	      <button class="btn btn-success" type="submit">Submit</button>
+	      <button class="btn btn-success" validation-submit="Form" ng-click="submit()">Submit</button>
 	      <button class="btn" ng-click="showModal = false">Cancel</button>
 	    </div>
 		</form>

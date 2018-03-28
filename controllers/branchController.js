@@ -118,5 +118,18 @@ module.exports = {
             }
             return res.status(204).json();
         });
+    },
+
+    /*
+    * branchController.verify()  
+    */
+    verify: function(req, res) {
+      var name = req.params.name;
+      branchModel.findOne({name : name}, function (err, branch) {
+          if (err || !branch) {
+              return res.status(200).json();
+          }
+          return res.status(500).json();
+      });
     }
 };

@@ -18,6 +18,11 @@ router.get('/:id', branchController.show);
 router.post('/', branchController.create);
 
 /*
+ * Exists
+ */
+router.post('/exists/:name', branchController.verify);
+
+/*
  * PUT
  */
 router.put('/:id', branchController.update);

@@ -11,7 +11,7 @@ module.exports = {
      * userController.list()
      */
     list: function (req, res) {
-        userModel.find(function (err, users) {
+        userModel.find({_id : {$ne : req.session._id}},function (err, users) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting user.',
@@ -101,7 +101,12 @@ module.exports = {
 			user.placeOfBirth = req.body.placeOfBirth ? req.body.placeOfBirth : user.placeOfBirth;
 			user.branch = req.body.branch ? req.body.branch : user.branch;
 			user.profile = req.body.profile ? req.body.profile : user.profile;
-			user.password = req.body.password ? req.body.password : user.password;
+      if(req.body.password && req.body.password.trim()!=""){
+         user.password = req.body.password;
+      }
+			//user.password = (req.body.password || req.body.password!="") ? req.body.password : user.password;
+
+
 
             user.save(function (err, user) {
                 if (err) {

@@ -86,7 +86,7 @@ module.exports = {
             profile.name = req.body.name ? req.body.name : profile.name;
 			profile.description = req.body.description ? req.body.description : profile.description;
 			profile.status = req.body.status ? req.body.status : profile.status;
-		
+
             profile.save(function (err, profile) {
                 if (err) {
                     return res.status(500).json({
@@ -114,5 +114,16 @@ module.exports = {
             }
             return res.status(204).json();
         });
+    },
+
+    /* exists() */
+    verify: function(req, res) {
+      var name = req.params.name;
+      profileModel.findOne({name : name}, function (err, profile) {
+          if (err || !profile) {
+              return res.status(200).json();
+          }
+          return res.status(500).json();
+      });
     }
 };

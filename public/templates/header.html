@@ -19,8 +19,8 @@
 
 <header class="side-header light-skin opened-menu">
     <div class="admin-details">
-        <span><img src="images/resource/admin.jpg" alt="" /></span>
-        <h3 style="margin-top:15px;">Junaid Ali</h3>
+        <span><img src="{{user.photo?user.photo:'images/avatar.jpg'}}" alt="" /></span>
+        <h3 style="margin-top:15px;" >{{user.firstName}} {{user.lastName}}</h3>
         <i>Admin</i>
     </div>
     <div class="menu-scroll">

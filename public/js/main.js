@@ -1,19 +1,10 @@
-/**
- * AngularJS Tutorial 1
- * @author Nick Kaye <nick.c.kaye@gmail.com>
- */
-
-/**
- * Main AngularJS Web Application
- */
-
 
 /**
  * Configure the Routes
  */
 var app = angular.module('AmericanLyceum',
- ['ngRoute',"angular-table",'angularValidator',
-  'ui.bootstrap.modal','angular-click-outside']).
+ ['ngRoute',"angular-table",'validation', 'validation.rule',
+  'ui.bootstrap.modal','angular-click-outside','toaster']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider
 
@@ -25,7 +16,7 @@ var app = angular.module('AmericanLyceum',
                 }]
             },
       })
-    .when("/forgot-password",{templateUrl : "partials/pages/forgot-password.html", controller : "ForgotPasswordCtrl"})
+      .when("/forgot-password",{templateUrl : "partials/pages/forgot-password.html", controller : "ForgotPasswordCtrl"})
 
 
     .when("/home",{templateUrl : "partials/pages/home.html",controller : "HomeCtrl"})
@@ -33,7 +24,7 @@ var app = angular.module('AmericanLyceum',
       .when("/school-branches/create",{templateUrl : "partials/pages/school-branches-create.html"})
     .when("/users", {templateUrl: "partials/pages/users.html", controller: "UsersCtrl"})
       .when("/users/create", {templateUrl: "partials/pages/user-new.html", controller: "UsersCreateCtrl"})
-      .when("/users/create/:id", {templateUrl: "partials/pages/user-new.html", controller: "UsersCreateCtrl"})      
+      .when("/users/create/:id", {templateUrl: "partials/pages/user-new.html", controller: "UsersCreateCtrl"})
     .when("/profiles", {templateUrl: "partials/pages/profiles.html", controller: "ProfilesCtrl"})
       .when("/profiles/permissions/:profile", {templateUrl: "partials/pages/permissions.html", controller: "PermissionsCtrl"})
 
@@ -43,86 +34,15 @@ var app = angular.module('AmericanLyceum',
       });
 
 
-
   }]).
-
-  controller('HomeCtrl',['$scope','$http','$window',function($scope,$http, $window){
-
-    pageEnd();
-  }]).
-
-  controller('SchoolBranchesCtrl',['$scope','$http','$window',function($scope,$http, $window){
-    $scope.list = [];
-    $scope.branch  = {};
-    $scope.rowIndex  = null;
-
-    $scope.open = function(){
-      $scope.showModal = true;
-      $scope.rowIndex  = null;
-      $scope.branch = {};
-    }
-
-    $scope.edit = function(){
-      if($scope.rowIndex!= null){
-        console.log('edit');
-        $scope.branch = $scope.list[$scope.rowIndex];
-        $scope.showModal = true;
-      }
-    }
-
-    $scope.remove = function(){
-      if($scope.rowIndex!= null){
-        var id  = $scope.list[$scope.rowIndex]._id;
-        $http({method : "DELETE" , url : '/branches/'+id}).success(function(data){
-          $scope.list = $scope.list.filter(branch => branch._id != id);
-          $scope.rowIndex = null;
-        }).error(function(){
-        });
-      }
-    }
-
-    $scope.submit = function(){
-       if($scope.rowIndex==null){
-         //save
-         $http({method : "POST" , url : '/branches' , data : $scope.branch}).success(function(data){
-           $scope.list.push(data);
-           $scope.showModal = false;
-         }).error(function(){
-         });
-       }else{
-         //update
-         $http({method : "PUT" , url : '/branches/'+$scope.list[$scope.rowIndex]._id , data : $scope.branch}).success(function(data){
-           $scope.list[$scope.rowIndex]= $scope.branch;
-           $scope.showModal = false;
-         }).error(function(){
-         });
-       }
-
-    }
-
-    $scope.reload = function(){
-      $http({method : "GET" , url : '/branches' , data : $scope.branch}).success(function(data){
-        $scope.list = data;
-      }).error(function(){
-      });
-    }
-
-    $scope.reload();
-
-    $scope.rowSelect = function($index){
-      $scope.rowIndex = $index;
-    }
-
-    pageEnd();
-  }]).
-
 
   //Login Controller
-  controller('LoginCtrl',['$scope','$http','$window',function($scope,$http, $window){
+  controller('LoginCtrl',['$scope','$http','$window','auth',function($scope,$http, $window,auth){
       $scope.user = {};
       $scope.login = function(){
         $http({method : 'POST', url : "/login", data  : $scope.user})
         .success(function(data){
+           auth.setUser(data);
            $window.location="#/home"
         }).error(function(error){
            $scope.error = true;
@@ -132,81 +52,7 @@ var app = angular.module('AmericanLyceum',
   controller('ForgotPasswordCtrl',['$scope',function($scope){
 
   }]).
-  controller('ProfilesCtrl',['$scope',"$filter","$http",function($scope,$filter,$http){
-
-    $scope.list= [];
-    $scope.profile = {};
-    $scope.rowIndex  = false;
-
-
-
-    $scope.rowSelect = function($index){
-      $scope.rowIndex = $index;
-    }
-    $scope.clickOutside = function(){
-      console.log("clickOutside");
-      $scope.rowIndex = null;
-    }
-
-    $scope.submit  = function(){
-       if($scope.rowIndex!=null){
-         //edit
-         var id  = $scope.list[$scope.rowIndex]._id;
-         $http({method : "PUT" , url : '/profiles/'+id, data : $scope.profile }).success(function(data){
-           $scope.list[$scope.rowIndex] = data;
-           $scope.rowIndex = null;
-         }).error(function(){
-         });
-       }else{
-         //save
-         $http({method : "POST" , url : '/profiles' , data : $scope.profile}).success(function(data){
-           $scope.list.push(data);
-           $scope.showModal = false;
-         }).error(function(){
-         });
-       }
-       $scope.showModal = false;
-    }
-
-    $scope.open = function(){
-      $scope.profile = {};
-      $scope.showModal = true;
-      $scope.rowIndex= null;
-    }
-
-
-    $scope.edit  = function(){
-       if($scope.rowIndex!=null){
-         $scope.profile = $scope.list[$scope.rowIndex];
-         $scope.showModal = true;
-       }
-    }
-
-    $scope.remove  = function(){
-      if($scope.rowIndex!=null){
-        var id  = $scope.list[$scope.rowIndex]._id;
-        $http({method : "DELETE" , url : '/profiles/'+id}).success(function(data){
-          $scope.list = $scope.list.filter(profile => profile._id != id);
-          $scope.rowIndex = null;
-        }).error(function(){
-        });
-      }
-    }
-
-    $scope.reload = function(){
-      $http({method : "GET" , url : '/profiles' , data : $scope.branch}).success(function(data){
-        $scope.list = data;
-      }).error(function(){
-      });
-    }
-
-    $scope.reload();
-
-
-
-    pageEnd();
-
-  }]).
+  
   factory('logoutService', function ($location,$http) {
       return function () {
         $http({method : "GET", url : "/logout"}).success(function(){
@@ -214,27 +60,87 @@ var app = angular.module('AmericanLyceum',
         });
       }
   })
-  .directive("fileread", [function () {
-      return {
-          scope: {
-              fileread: "="
-          },
-          link: function (scope, element, attributes) {
-              element.bind("change", function (changeEvent) {
-                  return _.map(changeEvent.target.files, function(file){
-                    scope.fileread = [];
-                    var reader = new FileReader();
-                    reader.onload = function (loadEvent) {
-                        scope.$apply(function () {
-                            scope.fileread.push(loadEvent.target.result);
-                        });
-                    }
-                    reader.readAsDataURL(file);
-                  });
+  .directive("ngFileSelect", function(fileReader, $timeout) {
+    return {
+      scope: {
+        ngModel: '='
+      },
+      link: function($scope, el) {
+        function getFile(file) {
+          fileReader.readAsDataUrl(file, $scope)
+            .then(function(result) {
+              $timeout(function() {
+                $scope.ngModel = result;
               });
-          }
+            });
+        }
+
+        el.bind("change", function(e) {
+          var file = (e.srcElement || e.target).files[0];
+          getFile(file);
+        });
       }
-  }])
+    };
+  })
+
+  .factory("fileReader", function($q, $log) {
+      var onLoad = function(reader, deferred, scope) {
+        return function() {
+          scope.$apply(function() {
+            deferred.resolve(reader.result);
+          });
+        };
+      };
+
+      var onError = function(reader, deferred, scope) {
+        return function() {
+          scope.$apply(function() {
+            deferred.reject(reader.result);
+          });
+        };
+      };
+
+      var onProgress = function(reader, scope) {
+        return function(event) {
+          scope.$broadcast("fileProgress", {
+            total: event.total,
+            loaded: event.loaded
+          });
+        };
+      };
+
+      var getReader = function(deferred, scope) {
+        var reader = new FileReader();
+        reader.onload = onLoad(reader, deferred, scope);
+        reader.onerror = onError(reader, deferred, scope);
+        reader.onprogress = onProgress(reader, scope);
+        return reader;
+      };
+
+      var readAsDataURL = function(file, scope) {
+        var deferred = $q.defer();
+
+        var reader = getReader(deferred, scope);
+        reader.readAsDataURL(file);
+
+        return deferred.promise;
+      };
+
+      return {
+        readAsDataUrl: readAsDataURL
+      };
+    })
+  .factory("auth", function($window, $rootScope) {
+      return {
+        setUser: function(val) {
+          $window.localStorage && $window.localStorage.setItem('user', JSON.stringify(val));
+          return this;
+        },
+        getUser: function() {
+          return $window.localStorage && JSON.parse($window.localStorage.getItem('user'));
+        }
+      };
+    })
   .run(['$http','$rootScope','$location', function($http,$rootScope,$location) {
     console.log("Configuring...");
     $rootScope.$on('$locationChangeStart', function (event, next, current) {

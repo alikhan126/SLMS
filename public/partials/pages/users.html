@@ -16,12 +16,12 @@
 							New
 					</a>
 		        <div class="pull-right" style="margin-top: -5px;">
-		        	<input type="search" class="form-control" placeholder="Search" aria-controls="data">
+		        	<input type="search" class="form-control" placeholder="Search" ng-model="query" ng-change="search()" aria-controls="data">
 		        </div>
 		    </div>
 		    <div class="panel-body">
 
-					<table class="table table-striped" at-table at-paginated at-list="list" at-config="config">
+					<table class="table table-striped" at-table at-paginated at-list="filterList" at-config="config">
 					  <thead></thead>
 					  <tbody>
 					    <tr>
@@ -46,7 +46,7 @@
 					  </tbody>
 					</table>
 
-					<at-pagination at-list="list" at-config="config"></at-pagination>
+					<at-pagination at-list="filterList" at-config="config"></at-pagination>
 
 
 		    </div>
