@@ -1,0 +1,80 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+<div class="panel-content">
+
+	<h3> <i class="fa fa-table"></i> Periods </h3>
+  <p> Define periods timeline  </p>
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	    	<button ng-click="open()" class="btn btn-sm btn-primary">
+	                <i class="fa fa-plus-circle"></i>
+	        </button>
+	        
+	        |
+	        <button ng-click="reload()" class="btn btn-sm btn-default">
+	                <i class="fa fa-refresh"></i>
+	        </button>
+	        <div class="pull-right" style="margin-top: -5px;">
+	        	<input type="search" class="form-control" placeholder="Search" ng-model="query" ng-change="search()" aria-controls="data">
+	        </div>
+	    </div>
+	    <div class="panel-body">
+	    	<table class="table table-hover" at-table at-paginated at-list="filteredList" at-config="config">
+			  <thead></thead>
+			  <tbody>
+			    <tr>
+			      <td at-implicit at-title="Start" >{{item.start | date : 'shortTime' }}</td>
+			      <td at-implicit at-title="End" >{{item.end | date : 'shortTime' }}</td>
+			      <td at-implicit at-attribute="title" ></td>
+            	  <td at-title="Actions">
+		      		<button ng-click="edit(item._id,Form)" class="btn btn-sm btn-warning" >
+			                <i class="fa fa-edit"></i>
+			        </button>
+			        <button ng-click="remove(item._id)" class="btn btn-sm btn-danger">
+			                <i class="fa fa-trash"></i>
+			        </button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+
+			<at-pagination at-list="filteredList" at-config="config"></at-pagination>
+	    </div>
+	</div>
+
+	  <div modal="showModal" close="cancel()">
+      <form   name='Form' >
+	    <div class="modal-header">
+	        <h4>Add  Slot</h4>
+	    </div>
+	    <div class="modal-body">
+  	     <div class="form-group">
+  	  	 	 <label>Start <span class="text-danger">*</span></label>
+  			   <input type="time" name="start" ng-model="data.start" class="form-control"  validator="required">
+  			 </div>
+         <div class="form-group">
+  			 <label>End <span class="text-danger">*</span></label>
+  			   <input type="time" name="end" ng-model="data.end" class="form-control"  validator="required">
+  		 </div>
+  		 <div class="form-group">
+  			 <label>Title</label>
+  			   <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="e.g Break">
+  			 </div>
+	    </div>
+
+	    <div class="modal-footer">
+	      <input  class="btn btn-success" validation-submit="Form" ng-click="submit(Form)" type="submit" value="Submit">
+	      <button class="btn" ng-click="showModal = false">Cancel</button>
+	    </div>
+      </form>
+
+	  </div>
+
+
+</div><!-- Panel Content -->
+<script type="text/javascript">
+	
+</script>

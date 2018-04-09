@@ -14256,3 +14256,7 @@ label{
 .form-group{
   position: relative;
 }
+
+.slimScrollDiv, .side-menus{
+    height: 100vh !important;
+}

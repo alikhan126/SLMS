@@ -1,0 +1,70 @@
+<div id="progressBar">
+	<div class="loader"></div>
+</div>
+
+<div class="panel-content">
+
+	<h3> <i class="fa fa-briefcase"></i> Qualifications </h3>
+    <p> Define qualifications/class standards of school </p>
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">
+	    	<button ng-click="open()" class="btn btn-sm btn-primary">
+	                <i class="fa fa-plus-circle"></i>
+	        </button>
+	        
+	        |
+	        <button ng-click="reload()" class="btn btn-sm btn-default">
+	                <i class="fa fa-refresh"></i>
+	        </button>
+	        <div class="pull-right" style="margin-top: -5px;">
+	        	<input type="search" class="form-control" placeholder="Search" ng-model="query" ng-change="search()" aria-controls="data">
+	        </div>
+	    </div>
+	    <div class="panel-body">
+	    	<table class="table table-hover" at-table at-paginated at-list="filteredList" at-config="config">
+			  <thead></thead>
+			  <tbody>
+			    <tr>
+			      <td at-implicit at-attribute="Title" ></td>
+            	  <td at-title="Actions">
+		      		<button ng-click="edit(item._id,Form)" class="btn btn-sm btn-warning" >
+			                <i class="fa fa-edit"></i>
+			        </button>
+			        <button ng-click="remove(item._id)" class="btn btn-sm btn-danger">
+			                <i class="fa fa-trash"></i>
+			        </button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+
+			<at-pagination at-list="filteredList" at-config="config"></at-pagination>
+	    </div>
+	</div>
+
+	  <div modal="showModal" close="cancel()">
+      <form   name='Form' >
+	    <div class="modal-header">
+	        <h4>Add Qualification</h4>
+	    </div>
+	    <div class="modal-body">
+  	     <div class="form-group">
+  	  	 	 <label>Title</label>
+  			   <input type="text" name="name" ng-model="data.Title" class="form-control" placeholder="e.g Kindergarten" validator="required">
+  			 </div>
+	    </div>
+
+	    <div class="modal-footer">
+	      <input  class="btn btn-success" validation-submit="Form" ng-click="submit(Form)" type="submit" value="Submit">
+	      <button class="btn" ng-click="showModal = false">Cancel</button>
+	    </div>
+      </form>
+
+	  </div>
+
+
+</div><!-- Panel Content -->
+<script type="text/javascript">
+	
+</script>

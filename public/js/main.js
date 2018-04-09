@@ -28,6 +28,13 @@ var app = angular.module('AmericanLyceum',
     .when("/profiles", {templateUrl: "partials/pages/profiles.html", controller: "ProfilesCtrl"})
       .when("/profiles/permissions/:profile", {templateUrl: "partials/pages/permissions.html", controller: "PermissionsCtrl"})
 
+    .when("/years",{templateUrl : "partials/pages/year.html",controller : "YearCtrl"})
+    .when("/qualifications",{templateUrl : "partials/pages/qualification.html",controller : "QualificationCtrl"})
+    .when("/courses",{templateUrl : "partials/pages/course.html",controller : "CourseCtrl"})
+    .when("/periods",{templateUrl : "partials/pages/periods.html",controller : "PeriodsCtrl"})
+    .when("/leave-type",{templateUrl : "partials/pages/staff-leave-type.html",controller : "LeaveTypeCtrl"})
+
+
 
      .otherwise({
         redirectTo: '/pages/404'

@@ -39,7 +39,7 @@ var User = require("./models/userModel.js")
 
 User.findOne({
     email : "admin@school.com",
-    password : "1234"
+    password : "1234",
 }).exec(function(err,user){
   if(!user){
     new User({
@@ -111,6 +111,30 @@ app.use('/profiles', profiles);
 app.get("/actions",function(req,res){
   res.json(permissions);
 });
+
+/* Years  */
+var years = require('./routes/yearRoutes');
+app.use('/years', years);
+
+
+/* Qualifications */
+var qualifications = require('./routes/qualificationsRoutes.js');
+app.use('/qualifications',qualifications);
+
+
+/* Courses */
+var courses = require('./routes/coursesRoutes.js');
+app.use('/courses',courses);
+
+
+/* Periods */
+var periods = require('./routes/periodsRoutes.js');
+app.use('/periods',periods);
+
+/* Leave Types */
+var leaveTypes = require('./routes/leaveTypesRoutes.js');
+app.use('/leaveTypes',leaveTypes);
+
 
 /* Users  */
 var users = require('./routes/userRoutes');
