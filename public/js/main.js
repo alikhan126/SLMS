@@ -33,6 +33,7 @@ var app = angular.module('AmericanLyceum',
     .when("/courses",{templateUrl : "partials/pages/course.html",controller : "CourseCtrl"})
     .when("/periods",{templateUrl : "partials/pages/periods.html",controller : "PeriodsCtrl"})
     .when("/leave-type",{templateUrl : "partials/pages/staff-leave-type.html",controller : "LeaveTypeCtrl"})
+    .when("/settings",{templateUrl : "partials/pages/settings.html",controller : "SettingsCtrl"})
 
 
 
@@ -157,7 +158,7 @@ var app = angular.module('AmericanLyceum',
         console.log("is restricted page ? "+restrictedPage);
         if(restrictedPage)
           $http({ url : "/checkLogin"}).success(function(data){
-            if(!data.login){
+          if(!data.login){
               $location.path('/');
             }
           });

@@ -121,7 +121,6 @@ app.use('/years', years);
 var qualifications = require('./routes/qualificationsRoutes.js');
 app.use('/qualifications',qualifications);
 
-
 /* Courses */
 var courses = require('./routes/coursesRoutes.js');
 app.use('/courses',courses);
@@ -137,8 +136,16 @@ app.use('/leaveTypes',leaveTypes);
 
 
 /* Users  */
-var users = require('./routes/userRoutes');
+var users = require('./routes/userRoutes.js');
 app.use('/users', users);
+
+
+/* Config */
+var config = require('./routes/configRoutes.js');
+app.use('/config', config);
+
+
+
 
 /* attach permission */
 var profileModel = require('./models/profileModel.js');
@@ -177,6 +184,6 @@ app.get('/permissions/granted/:profile',function(req,res){
   })
 });
 
-app.listen(3000, () =>
-	console.log('listening on port 3000!')
+app.listen(8000, () =>
+	console.log('listening on port 8000!')
 );
